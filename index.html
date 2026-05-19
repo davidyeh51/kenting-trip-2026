@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0077b6">
+<title>🌊 墾丁親子慢旅 5/21–5/23</title>
+<style>
+  :root {
+    --ocean: #0077b6;
+    --sea: #00b4d8;
+    --sky: #90e0ef;
+    --sand: #ffd60a;
+    --coral: #ff6b6b;
+    --sunset: #ff9f43;
+    --leaf: #2d9a5a;
+    --cream: #fff8f0;
+    --dark: #1a1a2e;
+    --gray: #6c757d;
+    --light: #f8f9fa;
+    --card-shadow: 0 4px 20px rgba(0,119,182,0.12);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: #e8f4f8;
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0077b6 0%, #00b4d8 50%, #90e0ef 100%);
+    padding: 50px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 40px;
+    background: #e8f4f8;
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-wave {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    line-height: 1.3;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.9);
+    margin-top: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 14px;
+  }
+
+  /* ── TABS ── */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    font-family: inherit;
+  }
+  .tab-btn.active {
+    color: var(--ocean);
+    border-bottom-color: var(--ocean);
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .container { padding: 20px 16px 100px; max-width: 600px; margin: 0 auto; }
+
+  /* ── DAY HEADER ── */
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .day-header.day1 { background: linear-gradient(135deg, #0077b6, #00b4d8); }
+  .day-header.day2 { background: linear-gradient(135deg, #ff6b6b, #ff9f43); }
+  .day-header.day3 { background: linear-gradient(135deg, #2d9a5a, #52c785); }
+  .day-header .icon { font-size: 2.2rem; }
+  .day-header .info { flex: 1; }
+  .day-header .date { font-size: 0.8rem; opacity: 0.9; font-weight: 500; }
+  .day-header .title { font-size: 1.1rem; line-height: 1.3; }
+
+  /* ── TIMELINE CARD ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 22px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #90e0ef, #fff);
+  }
+  .t-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .t-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    z-index: 1;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,119,182,0.2);
+  }
+  .t-card {
+    flex: 1;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
+  }
+  .t-card:active { transform: scale(0.98); }
+  .t-time {
+    font-size: 0.75rem;
+    color: var(--ocean);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .t-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+  .t-desc {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .t-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 0.73rem;
+    font-weight: 600;
+  }
+  .tag-baby { background: #fff0f0; color: var(--coral); }
+  .tag-food { background: #fff8e0; color: #d48806; }
+  .tag-cool { background: #e8f8ff; color: var(--ocean); }
+  .tag-photo { background: #f0f0ff; color: #7c3aed; }
+  .tag-walk { background: #f0fff4; color: var(--leaf); }
+  .tag-birthday { background: #fff0f8; color: #d63384; }
+
+  /* MAP BUTTON */
+  .map-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    color: #fff;
+    border-radius: 50px;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    width: fit-content;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .map-btn:active { opacity: 0.8; transform: scale(0.97); }
+
+  /* BABY ALERT */
+  .baby-alert {
+    background: linear-gradient(135deg, #fff5f5, #fff0f8);
+    border-left: 4px solid var(--coral);
+    border-radius: 0 12px 12px 0;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: #c0392b;
+    line-height: 1.6;
+  }
+  .baby-alert strong { color: var(--coral); }
+
+  /* ── INFO CARDS ── */
+  .info-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 16px;
+  }
+  .info-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .facility-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .facility-item {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+  .facility-item .f-name { font-weight: 700; margin-bottom: 4px; color: var(--ocean); }
+  .facility-item .f-info { color: #555; line-height: 1.5; }
+
+  /* ── CHECKLIST ── */
+  .checklist-header {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    border-radius: var(--radius);
+    padding: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .checklist-header h2 { font-size: 1.2rem; margin-bottom: 6px; }
+  .checklist-header p { font-size: 0.85rem; opacity: 0.9; }
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.3);
+    border-radius: 50px;
+    height: 10px;
+    margin-top: 14px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--sand);
+    border-radius: 50px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin-top: 6px;
+    text-align: right;
+  }
+
+  .checklist-category {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 14px;
+  }
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: linear-gradient(to right, #f8f9fa, #fff);
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .cat-icon { font-size: 1.3rem; }
+  .cat-title { font-size: 0.95rem; font-weight: 700; flex: 1; }
+  .cat-count {
+    font-size: 0.8rem;
+    background: var(--ocean);
+    color: #fff;
+    border-radius: 50px;
+    padding: 2px 9px;
+    font-weight: 600;
+  }
+  .cat-count.done { background: var(--leaf); }
+  .cat-toggle { font-size: 0.8rem; color: var(--gray); }
+  .cat-items { padding: 6px 0; }
+  .cat-items.collapsed { display: none; }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border-bottom: 1px solid #fafafa;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:active { background: #f0f8ff; }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2.5px solid #cce4f0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .check-box.checked {
+    background: var(--leaf);
+    border-color: var(--leaf);
+  }
+  .check-box .check-mark {
+    color: #fff;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .check-box.checked .check-mark { opacity: 1; }
+
+  .check-label { flex: 1; font-size: 0.9rem; }
+  .check-label.done {
+    text-decoration: line-through;
+    color: var(--gray);
+  }
+  .check-qty {
+    font-size: 0.75rem;
+    color: var(--gray);
+    background: #f0f0f0;
+    border-radius: 50px;
+    padding: 2px 8px;
+  }
+
+  .reset-btn {
+    width: 100%;
+    padding: 14px;
+    border: 2px dashed #cce4f0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ocean);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    margin-top: 8px;
+  }
+  .reset-btn:active { background: #e8f4f8; }
+
+  /* ── BIRTHDAY GAME ── */
+  .bday-section {
+    background: linear-gradient(160deg, #ff6b6b, #ff9f43, #ffd60a);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(255,107,107,0.3);
+  }
+  .bday-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+  .bday-section p { font-size: 0.85rem; opacity: 0.9; margin-bottom: 20px; }
+
+  .cake-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto 20px;
+  }
+  .cake-svg { width: 200px; height: 200px; }
+
+  /* Candles */
+  .candle-group { cursor: pointer; }
+  .candle-flame {
+    transform-origin: center bottom;
+    animation: flicker 0.8s ease-in-out infinite alternate;
+  }
+  .candle-flame.blown {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  @keyframes flicker {
+    0% { transform: scaleY(1) scaleX(1) rotate(-2deg); }
+    50% { transform: scaleY(1.1) scaleX(0.9) rotate(1deg); }
+    100% { transform: scaleY(0.95) scaleX(1.05) rotate(-1deg); }
+  }
+
+  .blow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff;
+    border-radius: 50px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: all 0.2s;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .blow-btn:active { transform: scale(0.96); }
+  .blow-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    animation: ripple-anim 0.6s linear;
+    pointer-events: none;
+  }
+  @keyframes ripple-anim {
+    from { width: 0; height: 0; opacity: 1; transform: translate(-50%,-50%) scale(0); }
+    to { width: 200px; height: 200px; opacity: 0; transform: translate(-50%,-50%) scale(1); }
+  }
+
+  .wish-input-wrap {
+    margin-top: 16px;
+    display: none;
+  }
+  .wish-input-wrap.visible { display: block; }
+  .wish-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    backdrop-filter: blur(8px);
+    margin-bottom: 10px;
+  }
+  .wish-input::placeholder { color: rgba(255,255,255,0.7); }
+  .wish-submit {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    color: #ff6b6b;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .wish-submit:active { opacity: 0.85; }
+  .wish-display {
+    margin-top: 16px;
+    display: none;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .wish-display.visible { display: block; }
+  .wish-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.6;
+  }
+  .confetti-wrap {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+    display: none;
+  }
+  .confetti-wrap.active { display: block; }
+  .confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    animation: confetti-fall 3s ease-in forwards;
+  }
+  @keyframes confetti-fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* MIC INDICATOR */
+  .mic-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+    color: rgba(255,255,255,0.9);
+  }
+  .mic-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+  }
+  .mic-dot.listening {
+    background: #7bed9f;
+    animation: pulse-mic 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-mic {
+    from { transform: scale(0.8); opacity: 0.7; }
+    to { transform: scale(1.2); opacity: 1; }
+  }
+
+  /* BLOWN ALL MESSAGE */
+  .all-blown-msg {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    padding: 14px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: none;
+    margin-top: 12px;
+    line-height: 1.6;
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+  .all-blown-msg.visible { display: block; }
+
+  /* ── HOTEL INFO ── */
+  .hotel-card {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: var(--radius);
+    padding: 20px;
+    color: #fff;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .hotel-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .hotel-card .hotel-sub { font-size: 0.8rem; opacity: 0.7; margin-bottom: 14px; }
+  .hotel-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .hotel-feat {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .hotel-feat .feat-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SCROLL TO TOP ── */
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--ocean);
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,119,182,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: transform 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    font-family: inherit;
+  }
+  .fab.visible { opacity: 1; pointer-events: auto; }
+  .fab:active { transform: scale(0.92); }
+
+  /* UTIL */
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ocean);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #cce4f0, transparent);
+    margin: 20px 0;
+  }
+
+  /* WEATHER STRIP */
+  .weather-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    margin-bottom: 20px;
+  }
+  .weather-strip::-webkit-scrollbar { display: none; }
+  .weather-day {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: var(--card-shadow);
+    min-width: 90px;
+  }
+  .weather-day .wd { font-size: 0.75rem; color: var(--gray); font-weight: 600; }
+  .weather-day .wicon { font-size: 1.5rem; margin: 4px 0; }
+  .weather-day .wtemp { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
+  .weather-day .wuv { font-size: 0.72rem; color: var(--coral); font-weight: 600; margin-top: 2px; }
+
+  /* TIPS ACCORDION */
+  .tip-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 10px;
+  }
+  .tip-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .tip-body {
+    padding: 0 16px 14px;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.8;
+    display: none;
+  }
+  .tip-body.open { display: block; }
+  .tip-arrow { margin-left: auto; transition: transform 0.3s; color: var(--gray); }
+  .tip-header.open .tip-arrow { transform: rotate(180deg); }
+
+  /* Responsive adjustments for wider screens */
+  @media (min-width: 600px) {
+    .container { padding: 24px 20px 100px; }
+    .hero h1 { font-size: 2.2rem; }
+    .facility-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🌊 墾丁親子慢旅</h1>
+  <div class="hero-sub">三天兩夜 · 高雄自駕出發 · 寶貝 14 個月大</div>
+  <div class="hero-badge">🗓 5/21 週四 → 5/23 週六 &nbsp;｜&nbsp; 🎂 5/22 媽媽生日快樂</div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="showTab('day1', this)">📅 Day 1</button>
+  <button class="tab-btn" onclick="showTab('day2', this)">🎂 Day 2 生日</button>
+  <button class="tab-btn" onclick="showTab('day3', this)">🦌 Day 3</button>
+  <button class="tab-btn" onclick="showTab('checklist', this)">🎒 打包清單</button>
+  <button class="tab-btn" onclick="showTab('bday', this)">🕯 許願遊戲</button>
+  <button class="tab-btn" onclick="showTab('tips', this)">💡 小貼士</button>
+</div>
+
+<!-- ═══════════════════════════════════════ DAY 1 ═══ -->
+<div class="section active" id="day1">
+  <div class="container">
+    <div class="day-header day1">
+      <div class="icon">🚗</div>
+      <div class="info">
+        <div class="date">5/21（週四）</div>
+        <div class="title">中午啟程南下<br>恆春老街美食與飯店池畔漫步</div>
+      </div>
+    </div>
+
+    <div class="weather-strip">
+      <div class="weather-day">
+        <div class="wd">5/21 四</div>
+        <div class="wicon">🌤</div>
+        <div class="wtemp">30–34°C</div>
+        <div class="wuv">UV：極高</div>
+      </div>
+      <div class="weather-day">
+        <div class="wd">出發</div>
+        <div class="wicon">🌡</div>
+        <div class="wtemp">中午 12:00</div>
+        <div class="wuv">車內 24°C</div>
+      </div>
+      <div class="weather-day">
+        <div class="wd">傍晚</div>
+        <div class="wicon">🌅</div>
+        <div class="wtemp">微風吹拂</div>
+        <div class="wuv">體感舒適</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <!-- 中午出發 -->
+      <div class="t-item">
+        <div class="t-dot">🏠</div>
+        <div class="t-card">
+          <div class="t-time">12:00 出發</div>
+          <div class="t-title">高雄市區悠閒整裝出發</div>
+          <div class="t-desc">走國道三號 → 九如交流道，接台一線南下至楓港，轉台26線。車程約 1.5–2 小時，寶寶可在冷氣車廂安穩睡午覺。</div>
+          <div class="t-tags">
+            <span class="tag tag-baby">👶 車睡午覺</span>
+            <span class="tag tag-cool">❄️ 冷氣 24–25°C</span>
+          </div>
+          <div class="baby-alert">
+            <strong>🔑 車內提醒：</strong>車窗加裝物理遮陽簾防止烈日直射，冷氣設定 24–25°C，寶寶坐安全汽座利用行車時間深度睡眠。
+          </div>
+        </div>
+      </div>
+
+      <!-- 恆春午餐 -->
+      <div class="t-item">
+        <div class="t-dot">🍕</div>
+        <div class="t-card">
+          <div class="t-time">13:30 午餐</div>
+          <div class="t-title">恆春老街午餐</div>
+          <div class="t-desc">
+            <strong>方案 A｜波波廚房 Kitchen Swell</strong><br>百年老宅改建，義式手工披薩，館內備有兒童餐椅，空調舒適。<br><br>
+            <strong>方案 B｜山下人家</strong><br>在地家常手路菜，黑椒黃金豆腐、剝皮辣椒雞湯，口味可調整，適合共食。<br><br>
+            <strong>快閃點心｜阿品綠豆蒜</strong><br>綿密微甜、焦糖黑糖香氣，恆春代表甜品。
+          </div>
+          <div class="t-tags">
+            <span class="tag tag-food">🍽 美食</span>
+            <span class="tag tag-baby">👶 兒童餐椅</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=恆春老街" target="_blank" class="map-btn">
+            📍 導航恆春老街
+          </a>
+          <div class="baby-alert">
+            <strong>🍼 寶寶提醒：</strong>老街部分騎樓有高低差，推車注意路面平整度。可請店員提供 70°C 熱水沖泡奶粉。
+          </div>
+        </div>
+      </div>
+
+      <!-- Check-in -->
+      <div class="t-item">
+        <div class="t-dot">🏨</div>
+        <div class="t-card">
+          <div class="t-time">15:30 入住</div>
+          <div class="t-title">Hotel dùa Kenting 辦理入住</div>
+          <div class="t-desc">墾丁25年來首間新飯店，全館無障礙電梯，推車免收折，Ferrari 鍍膜隔熱玻璃，斯林百蘭名床。記得預約嬰兒床、床圍、奶瓶消毒鍋、嬰兒澡盆。</div>
+          <div class="t-tags">
+            <span class="tag tag-cool">🛏 頂級住宿</span>
+            <span class="tag tag-baby">🍼 消毒鍋</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=Hotel+dua+Kenting" target="_blank" class="map-btn">
+            📍 導航飯店
+          </a>
+        </div>
+      </div>
+
+      <!-- 頂樓泳池 -->
+      <div class="t-item">
+        <div class="t-dot">🏊</div>
+        <div class="t-card">
+          <div class="t-time">16:00–17:30 戲水</div>
+          <div class="t-title">頂樓 360° 環景空中泳池</div>
+          <div class="t-desc">此時陽光已逐漸溫和，泳池旁遮蔭躺椅與 AIRSTREAM 風格餐車，視野環繞恆春半島，是親子放鬆的最佳時光。</div>
+          <div class="t-tags">
+            <span class="tag tag-photo">📸 拍照</span>
+            <span class="tag tag-baby">👙 防水尿布</span>
+          </div>
+          <div class="baby-alert">
+            <strong>🧴 泳池提醒：</strong>換上防水游泳尿布，塗幼兒物理防曬。戲水後回房用嬰兒澡盆溫水沖洗，避免受涼。
+          </div>
+        </div>
+      </div>
+
+      <!-- 夜市 -->
+      <div class="t-item">
+        <div class="t-dot">🌙</div>
+        <div class="t-card">
+          <div class="t-time">18:30 晚上</div>
+          <div class="t-title">墾丁大街夜市體驗</div>
+          <div class="t-desc">飯店步行1分鐘即達夜市核心區。烤山豬肉、炸鮮奶、在地海鮮小吃，人多可外帶回房享用，搭配房內55吋電視播放 YouTube 兒童節目。</div>
+          <div class="t-tags">
+            <span class="tag tag-food">🍢 夜市美食</span>
+            <span class="tag tag-walk">🚶 步行1分鐘</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=墾丁大街" target="_blank" class="map-btn">
+            📍 導航墾丁大街
+          </a>
+          <div class="baby-alert">
+            <strong>👥 人潮策略：</strong>一人推車、一人排隊購買，外帶回飯店舒適享用。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 飯店設施 -->
+    <div class="divider"></div>
+    <div class="section-title">🏨 Hotel dùa 親子設施亮點</div>
+    <div class="hotel-card">
+      <h3>Hotel dùa Kenting</h3>
+      <div class="hotel-sub">墾丁唯一頂級親子旅宿 · 2025全新開幕</div>
+      <div class="hotel-features">
+        <div class="hotel-feat"><span class="feat-icon">🛗</span>全館無障礙電梯，推車不需收折</div>
+        <div class="hotel-feat"><span class="feat-icon">🪟</span>Ferrari 鍍膜隔熱抗 UV 玻璃</div>
+        <div class="hotel-feat"><span class="feat-icon">🛏</span>英國斯林百蘭名床，預約嬰兒床</div>
+        <div class="hotel-feat"><span class="feat-icon">🍼</span>嬰兒澡盆、消毒鍋、床圍</div>
+        <div class="hotel-feat"><span class="feat-icon">🚿</span>乾濕分離、雙洗手台，親子一起洗</div>
+        <div class="hotel-feat"><span class="feat-icon">🏊</span>頂樓360°環景空中泳池</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ DAY 2 ═══ -->
+<div class="section" id="day2">
+  <div class="container">
+    <div class="day-header day2">
+      <div class="icon">🎂</div>
+      <div class="info">
+        <div class="date">5/22（週五）媽媽生日 🎉</div>
+        <div class="title">壯麗看海、後壁湖百元生魚片<br>海生館冷氣避暑與生日慶典</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <!-- 早餐 -->
+      <div class="t-item">
+        <div class="t-dot">🍳</div>
+        <div class="t-card">
+          <div class="t-time">08:30–10:00 早餐</div>
+          <div class="t-title">飯店精緻早餐</div>
+          <div class="t-desc">單點式或自助式早餐，悠閒享用。整裝出發前確認「默默很甜」蛋糕提貨時間（週五正常營業 12:00–20:00）。</div>
+          <div class="t-tags">
+            <span class="tag tag-food">🥐 飯店早餐</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 龍磐公園 -->
+      <div class="t-item">
+        <div class="t-dot">🌊</div>
+        <div class="t-card">
+          <div class="t-time">10:00 快閃</div>
+          <div class="t-title">龍磐公園 · 壯麗太平洋海景</div>
+          <div class="t-desc">遠眺一望無際的太平洋，視野極佳，是恆春半島最壯闊的海景之一。建議15–20分鐘快閃，避開日曬。</div>
+          <div class="t-tags">
+            <span class="tag tag-photo">📸 絕景</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=龍磐公園+恆春" target="_blank" class="map-btn">
+            📍 導航龍磐公園
+          </a>
+          <div class="baby-alert">
+            <strong>⚠️ 重要：</strong>龍磐屬崩崖地形，海風強烈，地面崎嶇，<strong>完全不適合推車</strong>。請改用嬰兒背巾抱持寶寶，並為寶寶戴有防風扣帶的遮陽帽。
+          </div>
+        </div>
+      </div>
+
+      <!-- 提蛋糕 -->
+      <div class="t-item">
+        <div class="t-dot">🎂</div>
+        <div class="t-card">
+          <div class="t-time">11:00 順道提貨</div>
+          <div class="t-title">默默很甜 · 提取慶生蛋糕</div>
+          <div class="t-desc">順道在恆春鎮中山路86號提取預訂的「八吋招牌半熟巴斯克乳酪蛋糕」，選用頂級澳洲起司與法國AOP發酵鮮奶油，中心乳酪入口即化，14個月寶寶也可安心享用。提貨後寄放飯店冷藏。</div>
+          <div class="t-tags">
+            <span class="tag tag-birthday">🎂 慶生蛋糕</span>
+            <span class="tag tag-food">🧀 巴斯克</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=Ce+Moment+默默很甜+恆春" target="_blank" class="map-btn">
+            📍 導航默默很甜
+          </a>
+          <div class="baby-alert">
+            <strong>📋 取蛋糕注意：</strong>每週二公休，週五 12:00–20:00 營業。出發前3天透過臉書粉絲專頁私訊預訂，提貨後請飯店冷藏保存至晚餐。
+          </div>
+        </div>
+      </div>
+
+      <!-- 後壁湖午餐 -->
+      <div class="t-item">
+        <div class="t-dot">🐟</div>
+        <div class="t-card">
+          <div class="t-time">11:30 午餐</div>
+          <div class="t-title">阿興生魚片（後壁湖本店）</div>
+          <div class="t-desc">提早11:30入座避開排隊人潮！綜合生魚片20片僅需100元，鮮美有厚度。寶寶可點：雨來菇炒蛋、水蓮、清蒸鮮魚去刺拌白飯。</div>
+          <div class="t-tags">
+            <span class="tag tag-food">🐠 生魚片</span>
+            <span class="tag tag-food">💰 超高CP值</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=阿興生魚片+後壁湖" target="_blank" class="map-btn">
+            📍 導航阿興生魚片
+          </a>
+          <div class="baby-alert">
+            <strong>🍚 寶寶餐點建議：</strong>雨來菇炒蛋（無重調味）、水蓮、清蒸鮮魚去刺，搭配白飯，天然無添加最適合。
+          </div>
+        </div>
+      </div>
+
+      <!-- 海生館 -->
+      <div class="t-item">
+        <div class="t-dot">🐋</div>
+        <div class="t-card">
+          <div class="t-time">13:30 下午避暑</div>
+          <div class="t-title">國立海洋生物博物館</div>
+          <div class="t-desc">
+            全台最完善的親子避暑聖地！館內恆溫 22–24°C，深藍微弱光源搭配水流白噪音，是寶寶最棒的午睡環境。家長可在海底隧道推行推車，引導寶寶安穩入睡2小時，同時欣賞企鵝、小白鯨、美麗海底世界。
+            <br><br>
+            <strong>免費嬰兒車租借</strong>（15kg以下，憑身分證）
+          </div>
+          <div class="t-tags">
+            <span class="tag tag-cool">❄️ 恆溫22–24°C</span>
+            <span class="tag tag-baby">🛒 免費推車租借</span>
+            <span class="tag tag-baby">🍼 專用哺乳室</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=國立海洋生物博物館" target="_blank" class="map-btn">
+            📍 導航海生館
+          </a>
+          <div class="baby-alert">
+            <strong>🎠 海生館親子設施：</strong>
+            三處服務台免費推車租借（攜帶身分證）｜三樓珊瑚大廳、二樓美麗海劇場前專用哺乳室（沙發＋熱水器）｜所有洗手間設尿布台｜紀念品店販賣 L 號紙尿褲（9–14kg）
+          </div>
+        </div>
+      </div>
+
+      <!-- 生日晚餐 -->
+      <div class="t-item">
+        <div class="t-dot">🥂</div>
+        <div class="t-card">
+          <div class="t-time">17:30 生日晚宴</div>
+          <div class="t-title">迷路小章魚 Piccolo Polpo · 南灣海景生日慶典 🎊</div>
+          <div class="t-desc">南灣海景第一排地中海風味餐廳，火烤章魚腳、櫻花蝦薯條、精緻燉飯，搭配浪漫南灣晚霞。慶生高潮：切開提前預訂的「默默很甜」八吋半熟巴斯克乳酪蛋糕！</div>
+          <div class="t-tags">
+            <span class="tag tag-birthday">🎂 媽媽生日</span>
+            <span class="tag tag-food">🐙 地中海料理</span>
+            <span class="tag tag-photo">🌅 南灣晚霞</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=迷路小章魚+南灣+墾丁" target="_blank" class="map-btn">
+            📍 導航迷路小章魚
+          </a>
+          <div class="baby-alert">
+            <strong>📞 重要：</strong>週五晚上極熱門，務必提前預約第一輪 17:30 或 18:00。推車收折放門口，改用店內兒童餐椅。寶寶可和大家一起淺嚐入口即化的巴斯克蛋糕！
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ DAY 3 ═══ -->
+<div class="section" id="day3">
+  <div class="container">
+    <div class="day-header day3">
+      <div class="icon">🦌</div>
+      <div class="info">
+        <div class="date">5/23（週六）</div>
+        <div class="title">萌獸親密接觸、看海美術館<br>枋山椰林漫步北返高雄</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <!-- 早餐 -->
+      <div class="t-item">
+        <div class="t-dot">🍳</div>
+        <div class="t-card">
+          <div class="t-time">09:00 早餐</div>
+          <div class="t-title">客房早餐 + 行李整理</div>
+          <div class="t-desc">悠閒享用早餐，開始整理行李準備退房。</div>
+        </div>
+      </div>
+
+      <!-- 鹿境 -->
+      <div class="t-item">
+        <div class="t-dot">🦌</div>
+        <div class="t-card">
+          <div class="t-time">09:30 萌獸時光</div>
+          <div class="t-title">鹿境 Paradise of Deer · 墾丁小奈良</div>
+          <div class="t-desc">地面平坦，推車暢行無阻！溫馴梅花鹿＋療癒水豚君。14個月寶寶正值感官發展期，看到小動物會非常興奮，在安全指導下可溫和撫摸感官探索。</div>
+          <div class="t-tags">
+            <span class="tag tag-walk">🦌 動物互動</span>
+            <span class="tag tag-baby">🌿 感官發展</span>
+            <span class="tag tag-photo">📸 超可愛</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=鹿境+Paradise+of+Deer+墾丁" target="_blank" class="map-btn">
+            📍 導航鹿境
+          </a>
+          <div class="baby-alert">
+            <strong>🧴 鹿境提醒：</strong>戶外陽光強烈，草地易有蚊蟲。進園前塗抹物理防曬＋噴灑成分安全的防蚊噴霧。
+          </div>
+        </div>
+      </div>
+
+      <!-- 退房 -->
+      <div class="t-item">
+        <div class="t-dot">🏨</div>
+        <div class="t-card">
+          <div class="t-time">11:00 退房</div>
+          <div class="t-title">Hotel dùa Kenting 辦理退房</div>
+          <div class="t-desc">確認行李清單，取回冷藏物品。退房後自駕往北，開始歸途慢旅。</div>
+        </div>
+      </div>
+
+      <!-- 看海美術館 -->
+      <div class="t-item">
+        <div class="t-dot">🎨</div>
+        <div class="t-card">
+          <div class="t-time">12:00–13:30 避暑觀展</div>
+          <div class="t-title">看海美術館 · 車城避暑首選</div>
+          <div class="t-desc">近年極受歡迎的室內展覽館，冷氣強勁，恰好避開正午12:00–14:00的南台灣烈日。牽著寶寶漫步展間欣賞藝術作品，無障礙坡道平整，推車進出方便。</div>
+          <div class="t-tags">
+            <span class="tag tag-cool">❄️ 冷氣避暑</span>
+            <span class="tag tag-photo">🎨 藝術展覽</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=看海美術館+車城+屏東" target="_blank" class="map-btn">
+            📍 導航看海美術館
+          </a>
+          <div class="baby-alert">
+            <strong>🧥 注意：</strong>館內冷氣強，建議替寶寶備薄長袖防吹風。大廳服務台可協助提供熱水。
+          </div>
+        </div>
+      </div>
+
+      <!-- 魔幻咖啡 -->
+      <div class="t-item">
+        <div class="t-dot">🥭</div>
+        <div class="t-card">
+          <div class="t-time">14:00 下午茶</div>
+          <div class="t-title">魔幻咖啡 · 枋山椰林海景</div>
+          <div class="t-desc">屏鵝公路枋山段，低消僅100元！大片椰林天然遮蔭，海風徐徐。爸媽享用清涼芒果冰沙看海，寶寶在推車上吃米餅歇息，幸福的歸途時光。</div>
+          <div class="t-tags">
+            <span class="tag tag-food">🥭 芒果冰沙</span>
+            <span class="tag tag-photo">🌴 椰林海景</span>
+          </div>
+          <a href="https://maps.google.com/maps?q=魔幻咖啡+枋山+屏東" target="_blank" class="map-btn">
+            📍 導航魔幻咖啡
+          </a>
+          <div class="baby-alert">
+            <strong>🦟 提醒：</strong>椰林下易有蚊蟲，下車前完整塗抹寶寶安全防蚊液。選擇有遮棚椰林遮擋的平坦座位區，定時餵食寶寶冷開水防水分流失。
+          </div>
+        </div>
+      </div>
+
+      <!-- 北返 -->
+      <div class="t-item">
+        <div class="t-dot">🏠</div>
+        <div class="t-card">
+          <div class="t-time">16:30 北返</div>
+          <div class="t-title">自駕北返高雄 · 無摩擦力完美收尾</div>
+          <div class="t-desc">1.5–2小時車程，寶寶在安全汽座內完成午後睡眠，醒來即抵達高雄。結束這趟充滿儀式感的親子慢旅！</div>
+          <div class="t-tags">
+            <span class="tag tag-baby">💤 車睡午覺</span>
+          </div>
+          <div class="baby-alert">
+            <strong>🏁 旅程回顧：</strong>恭喜完成三天兩夜零摩擦力的精緻親子假期，感謝每一刻的美好記憶！🌊
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ CHECKLIST ═══ -->
+<div class="section" id="checklist">
+  <div class="container">
+    <div class="checklist-header">
+      <h2>🎒 寶寶神隊友打包清單</h2>
+      <p>勾選已準備的物品，進度自動儲存</p>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 / 0 已準備</div>
+    </div>
+
+    <!-- 寶寶必備 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">👶</span>
+        <span class="cat-title">寶寶日常必備</span>
+        <span class="cat-count" id="cnt-baby">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-baby">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">紙尿褲（建議多帶2天份備用）</span>
+          <span class="check-qty">充足量</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">防水游泳尿布（泳池用）</span>
+          <span class="check-qty">3–4片</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">濕紙巾</span>
+          <span class="check-qty">2–3包</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒配方奶 / 副食品</span>
+          <span class="check-qty">三天份</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">奶瓶 + 奶嘴刷</span>
+          <span class="check-qty">2組</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">保溫瓶（沖泡奶粉熱水）</span>
+          <span class="check-qty">1個</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">零食米餅 / 嬰兒餅乾</span>
+          <span class="check-qty">充足量</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">寶寶衣物（含泳衣）</span>
+          <span class="check-qty">三天份+備用</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">薄長袖外套（冷氣防寒）</span>
+          <span class="check-qty">1件</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">防風遮陽帽（有扣帶）</span>
+          <span class="check-qty">1–2頂</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 寶寶安全防護 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">🛡</span>
+        <span class="cat-title">防曬防蚊安全</span>
+        <span class="cat-count" id="cnt-safety">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-safety">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">幼兒專用物理性防曬乳（SPF50+）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">寶寶安全防蚊噴霧/貼片</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">車窗物理遮陽簾</span>
+          <span class="check-qty">已裝</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒車推車防風薄毯（冷氣用）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 醫藥備用 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">💊</span>
+        <span class="cat-title">醫藥備用箱</span>
+        <span class="cat-count" id="cnt-med">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-med">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒退燒藥（備用）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">體溫計</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒止癢/蚊蟲叮咬藥膏</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">OK繃（大人小孩各用）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">寶寶腸胃藥（備用）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">手部消毒液</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 親子設備 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">🛒</span>
+        <span class="cat-title">親子出行裝備</span>
+        <span class="cat-count" id="cnt-gear">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-gear">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒安全汽座（已裝車）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">避震嬰兒推車</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">嬰兒背巾（龍磐公園使用）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">攜帶式尿布墊</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">寶寶最愛玩具/安撫物</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">行動電源（大容量）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大人用品 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">👨‍👩‍👧</span>
+        <span class="cat-title">爸媽自用物品</span>
+        <span class="cat-count" id="cnt-adult">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-adult">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">大人牙刷牙膏（飯店不提供！）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">刮鬍刀（飯店不提供！）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">換洗衣物（含泳衣）</span>
+          <span class="check-qty">三天份</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">身分證（海生館推車租借需用）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">大人防曬用品</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">相機 / 手機充電線</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 慶生準備 -->
+    <div class="checklist-category">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <span class="cat-icon">🎂</span>
+        <span class="cat-title">媽媽慶生專區</span>
+        <span class="cat-count" id="cnt-bday">0/0</span>
+        <span class="cat-toggle">▼</span>
+      </div>
+      <div class="cat-items" id="cat-bday">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">默默很甜蛋糕已預訂（出發前3天）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">迷路小章魚已預約（17:30 第一輪）</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">生日蠟燭 / 小禮物</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><span class="check-mark">✓</span></div>
+          <span class="check-label">慶生氣球（可請飯店協助布置）</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetChecklist()">🔄 重置所有勾選</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ BIRTHDAY GAME ═══ -->
+<div class="section" id="bday">
+  <div class="container">
+    <div class="bday-section">
+      <h2>🎂 媽媽生日快樂！</h2>
+      <p>5月22日 · 在南灣海風與燭光中許個願望</p>
+
+      <div class="mic-status" id="micStatus">
+        <span class="mic-dot" id="micDot"></span>
+        <span id="micText">點擊按鈕吹熄蠟燭</span>
+      </div>
+
+      <div class="cake-container">
+        <svg class="cake-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- 蛋糕底層 -->
+          <ellipse cx="100" cy="165" rx="75" ry="18" fill="#d4956a"/>
+          <rect x="25" y="140" width="150" height="30" rx="8" fill="#e8a87c"/>
+          <ellipse cx="100" cy="140" rx="75" ry="18" fill="#f0c49a"/>
+
+          <!-- 中層 -->
+          <ellipse cx="100" cy="120" rx="65" ry="16" fill="#d4956a"/>
+          <rect x="35" y="98" width="130" height="28" rx="8" fill="#e8a87c"/>
+          <ellipse cx="100" cy="98" rx="65" ry="16" fill="#f0c49a"/>
+
+          <!-- 上層 -->
+          <ellipse cx="100" cy="78" rx="52" ry="13" fill="#d4956a"/>
+          <rect x="48" y="60" width="104" height="24" rx="8" fill="#e8a87c"/>
+          <ellipse cx="100" cy="60" rx="52" ry="13" fill="#f5d4a0"/>
+
+          <!-- 奶油裝飾 -->
+          <path d="M48 98 Q60 88 72 98 Q84 88 96 98 Q108 88 120 98 Q132 88 144 98 Q156 88 165 98" stroke="#fff" stroke-width="4" fill="none"/>
+          <path d="M35 140 Q50 130 65 140 Q80 130 95 140 Q110 130 125 140 Q140 130 155 140 Q165 130 175 140" stroke="#fff" stroke-width="4" fill="none"/>
+
+          <!-- 草莓裝飾 -->
+          <ellipse cx="75" cy="58" rx="7" ry="8" fill="#e74c3c"/>
+          <ellipse cx="100" cy="56" rx="7" ry="8" fill="#e74c3c"/>
+          <ellipse cx="125" cy="58" rx="7" ry="8" fill="#e74c3c"/>
+          <path d="M75 50 l2-4 l-4 0 z" fill="#2d9a5a"/>
+          <path d="M100 48 l2-4 l-4 0 z" fill="#2d9a5a"/>
+          <path d="M125 50 l2-4 l-4 0 z" fill="#2d9a5a"/>
+
+          <!-- 蠟燭 1 -->
+          <g class="candle-group" id="candle0" onclick="blowCandle(0)">
+            <rect x="71" y="36" width="8" height="22" rx="4" fill="#ff6b6b"/>
+            <rect x="73" y="30" width="4" height="8" rx="2" fill="#ffd700"/>
+            <g class="candle-flame" id="flame0">
+              <ellipse cx="75" cy="26" rx="5" ry="8" fill="#ffd700" opacity="0.9"/>
+              <ellipse cx="75" cy="28" rx="3" ry="5" fill="#ff9f43"/>
+            </g>
+          </g>
+
+          <!-- 蠟燭 2 -->
+          <g class="candle-group" id="candle1" onclick="blowCandle(1)">
+            <rect x="96" y="32" width="8" height="26" rx="4" fill="#a29bfe"/>
+            <rect x="98" y="26" width="4" height="8" rx="2" fill="#ffd700"/>
+            <g class="candle-flame" id="flame1">
+              <ellipse cx="100" cy="22" rx="5" ry="8" fill="#ffd700" opacity="0.9"/>
+              <ellipse cx="100" cy="24" rx="3" ry="5" fill="#ff9f43"/>
+            </g>
+          </g>
+
+          <!-- 蠟燭 3 -->
+          <g class="candle-group" id="candle2" onclick="blowCandle(2)">
+            <rect x="121" y="36" width="8" height="22" rx="4" fill="#00b4d8"/>
+            <rect x="123" y="30" width="4" height="8" rx="2" fill="#ffd700"/>
+            <g class="candle-flame" id="flame2">
+              <ellipse cx="125" cy="26" rx="5" ry="8" fill="#ffd700" opacity="0.9"/>
+              <ellipse cx="125" cy="28" rx="3" ry="5" fill="#ff9f43"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div id="blowBtnWrap">
+        <button class="blow-btn" id="blowBtn" onclick="handleBlow(event)">
+          <span>💨 用力吹熄蠟燭！</span>
+        </button>
+        <div style="font-size:0.78rem;opacity:0.8;margin-top:10px;">（點蠟燭可單獨熄滅，或點按鈕全部吹熄）</div>
+      </div>
+
+      <div class="all-blown-msg" id="allBlownMsg">
+        🎉 蠟燭全部熄滅啦！<br>快許下你最深的心願吧！💝
+      </div>
+
+      <div class="wish-input-wrap" id="wishInputWrap">
+        <input type="text" class="wish-input" id="wishInput" placeholder="在這裡輸入你的心願... 🌟" maxlength="60">
+        <button class="wish-submit" onclick="submitWish()">💌 封存心願</button>
+      </div>
+
+      <div class="wish-display" id="wishDisplay">
+        <div class="wish-text" id="wishText"></div>
+      </div>
+    </div>
+
+    <!-- 生日行程提醒 -->
+    <div class="info-card">
+      <h3>🎊 5/22 慶生備忘清單</h3>
+      <div style="font-size:0.88rem;line-height:2;color:#444;">
+        ✅ 出發前3天 → 臉書私訊「默默很甜」預訂八吋巴斯克蛋糕<br>
+        ✅ 出發前 → 電話預約「迷路小章魚」17:30 第一輪<br>
+        🕚 11:00 → 恆春鎮中山路86號提貨蛋糕<br>
+        📦 提貨後 → 寄放飯店冷藏<br>
+        🍽 17:30 → 迷路小章魚報到，帶蛋糕進場<br>
+        🕯 晚宴中 → 點蠟燭切蛋糕，一家三口幸福慶生！
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ TIPS ═══ -->
+<div class="section" id="tips">
+  <div class="container">
+    <div class="section-title">💡 親子旅遊小貼士</div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        🌡 五月恆春氣候預警
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        五月恆春半島平均氣溫 30–34°C，UV指數極高。嬰幼兒體溫調節中樞尚未發育完全，長時間暴露高溫極易引發熱衰竭。本行程採「微氣候避難」策略：<strong>11:00–14:00</strong> 全程安排室內冷氣場所或車內。每天至少補充水分，觀察寶寶膚色與精神狀態。
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        💤 寶寶睡眠時鐘管理
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        14個月大寶寶清醒區間約 3.5–4 小時，每天需一次 1–2 小時深度午睡。本行程三天均安排「車內/推車午睡」：<br>
+        • <strong>Day 1</strong>：出發車程午睡（車內冷氣）<br>
+        • <strong>Day 2</strong>：海生館深藍白噪音推車睡眠<br>
+        • <strong>Day 3</strong>：北返車程午睡<br>
+        絕不因行程壓縮午睡，是降低育兒摩擦力的關鍵。
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        🚗 自駕路線規劃
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        高雄 → 墾丁：國道三號 → 九如交流道 → 台一線南下至楓港 → 台26線。車程約 1.5–2 小時。<br><br>
+        5/21（週四）出發可避開週末高度擁擠人潮，提升景點與餐廳推車無障礙體驗。各景點間車程均控制在30分鐘以內，降低路途疲憊。
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        🏨 飯店環保政策提醒
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        依台灣 2025 年減塑政策，<strong>Hotel dùa Kenting 不再提供一次性盥洗備品</strong>（牙刷、牙膏、刮鬍刀等）。務必自備大人與嬰幼兒的專用潔牙工具，以及常用盥洗用品。
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        🏥 恆春半島緊急醫療資訊
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        <strong>恆春基督教醫院</strong>（屏東縣恆春鎮恆公路101號）<br>電話：08-889-2293<br>提供24小時急診服務，為恆春半島最主要的醫療機構。建議出發前存入手機通訊錄備用。
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-header" onclick="toggleTip(this)">
+        📋 母嬰設施快速對照
+        <span class="tip-arrow">▼</span>
+      </div>
+      <div class="tip-body">
+        <strong>海生館</strong>：免費推車租借 ✅ | 專用哺乳室（沙發+熱水）✅ | 尿布台 ✅ | 紙尿褲販售 ✅<br>
+        <strong>Hotel dùa</strong>：嬰兒床/床圍/消毒鍋 ✅ | 嬰兒澡盆 ✅ | 雙洗手台 ✅ | 快煮壺 ✅<br>
+        <strong>看海美術館</strong>：無障礙尿布台 ✅ | 服務台熱水 ✅<br>
+        <strong>鹿境</strong>：無哺乳室 ⚠️ | 需自備保溫瓶<br>
+        <strong>魔幻咖啡</strong>：無哺乳室 ⚠️ | 需自備保溫瓶
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">🗺 景點地圖快速導航</div>
+
+    <div class="info-card">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="https://maps.google.com/maps?q=Hotel+dua+Kenting" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 Hotel dùa Kenting</a>
+        <a href="https://maps.google.com/maps?q=龍磐公園+恆春" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 龍磐公園</a>
+        <a href="https://maps.google.com/maps?q=阿興生魚片+後壁湖" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 阿興生魚片</a>
+        <a href="https://maps.google.com/maps?q=國立海洋生物博物館" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 國立海洋生物博物館</a>
+        <a href="https://maps.google.com/maps?q=迷路小章魚+南灣+墾丁" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 迷路小章魚</a>
+        <a href="https://maps.google.com/maps?q=鹿境+Paradise+of+Deer+墾丁" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 鹿境</a>
+        <a href="https://maps.google.com/maps?q=看海美術館+車城+屏東" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 看海美術館</a>
+        <a href="https://maps.google.com/maps?q=魔幻咖啡+枋山+屏東" target="_blank" class="map-btn" style="width:100%;justify-content:center;">📍 魔幻咖啡</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fab" onclick="scrollToTop()">↑</button>
+
+<script>
+// ── Tab navigation ──
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Tip accordion ──
+function toggleTip(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.tip-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.tip-header').forEach(h => h.classList.remove('open'));
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+// ── Category collapse ──
+function toggleCat(header) {
+  const items = header.nextElementSibling;
+  items.classList.toggle('collapsed');
+  header.querySelector('.cat-toggle').textContent = items.classList.contains('collapsed') ? '▶' : '▼';
+}
+
+// ── Checklist logic ──
+const STORAGE_KEY = 'kenting2526_checklist';
+
+function getState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveState(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch {}
+}
+
+function toggleCheck(item) {
+  const box = item.querySelector('.check-box');
+  const label = item.querySelector('.check-label');
+  const isChecked = box.classList.toggle('checked');
+  label.classList.toggle('done', isChecked);
+
+  // Persist
+  const state = getState();
+  const key = label.textContent.trim().slice(0, 30);
+  state[key] = isChecked;
+  saveState(state);
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const allItems = document.querySelectorAll('#checklist .check-item');
+  const checkedItems = document.querySelectorAll('#checklist .check-box.checked');
+  const total = allItems.length;
+  const done = checkedItems.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done} / ${total} 已準備完畢`;
+
+  // Update per-category counts
+  const cats = ['baby', 'safety', 'med', 'gear', 'adult', 'bday'];
+  cats.forEach(cat => {
+    const el = document.getElementById('cat-' + cat);
+    if (!el) return;
+    const all = el.querySelectorAll('.check-item').length;
+    const done = el.querySelectorAll('.check-box.checked').length;
+    const cnt = document.getElementById('cnt-' + cat);
+    if (cnt) {
+      cnt.textContent = `${done}/${all}`;
+      cnt.classList.toggle('done', done === all && all > 0);
+    }
+  });
+}
+
+function restoreChecklist() {
+  const state = getState();
+  document.querySelectorAll('#checklist .check-item').forEach(item => {
+    const label = item.querySelector('.check-label');
+    const key = label.textContent.trim().slice(0, 30);
+    if (state[key]) {
+      item.querySelector('.check-box').classList.add('checked');
+      label.classList.add('done');
+    }
+  });
+  updateProgress();
+}
+
+function resetChecklist() {
+  if (!confirm('確定要重置所有勾選嗎？')) return;
+  document.querySelectorAll('#checklist .check-box').forEach(b => b.classList.remove('checked'));
+  document.querySelectorAll('#checklist .check-label').forEach(l => l.classList.remove('done'));
+  saveState({});
+  updateProgress();
+}
+
+// ── Birthday candle game ──
+let blownCandles = new Set();
+let micStream = null;
+let audioCtx = null;
+let analyser = null;
+let isListening = false;
+let listenInterval = null;
+
+function blowCandle(idx) {
+  if (blownCandles.has(idx)) return;
+  blownCandles.add(idx);
+  const flame = document.getElementById('flame' + idx);
+  flame.classList.add('blown');
+  checkAllBlown();
+}
+
+function checkAllBlown() {
+  if (blownCandles.size >= 3) {
+    document.getElementById('allBlownMsg').classList.add('visible');
+    document.getElementById('blowBtnWrap').style.display = 'none';
+    document.getElementById('wishInputWrap').classList.add('visible');
+    fireConfetti();
+    stopMic();
+  }
+}
+
+function handleBlow(e) {
+  // Create ripple
+  const btn = e.currentTarget;
+  const r = document.createElement('span');
+  r.className = 'ripple';
+  r.style.left = (e.offsetX || 60) + 'px';
+  r.style.top = (e.offsetY || 20) + 'px';
+  btn.appendChild(r);
+  setTimeout(() => r.remove(), 700);
+
+  // Try microphone, fallback to instant blow
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    startMicBlow();
+  } else {
+    blowAll();
+  }
+}
+
+function blowAll() {
+  [0, 1, 2].forEach((i, idx) => {
+    setTimeout(() => blowCandle(i), idx * 200);
+  });
+}
+
+function startMicBlow() {
+  if (isListening) { blowAll(); return; }
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    .then(stream => {
+      micStream = stream;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 512;
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+
+      isListening = true;
+      document.getElementById('micDot').classList.add('listening');
+      document.getElementById('micText').textContent = '麥克風偵測中，對著螢幕吹氣！';
+
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      let blowCount = 0;
+
+      listenInterval = setInterval(() => {
+        analyser.getByteFrequencyData(data);
+        const avg = data.reduce((a, b) => a + b, 0) / data.length;
+
+        if (avg > 28) { // breath threshold
+          blowCount++;
+          if (blowCount > 2) {
+            blowAll();
+            clearInterval(listenInterval);
+          }
+        } else {
+          blowCount = Math.max(0, blowCount - 1);
+        }
+      }, 80);
+
+      // Auto stop after 8s
+      setTimeout(() => {
+        if (isListening) {
+          if (blownCandles.size < 3) blowAll();
+          stopMic();
+        }
+      }, 8000);
+    })
+    .catch(() => {
+      // Permission denied or not available — just blow all
+      blowAll();
+    });
+}
+
+function stopMic() {
+  isListening = false;
+  if (listenInterval) { clearInterval(listenInterval); listenInterval = null; }
+  if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+  if (audioCtx) { audioCtx.close(); audioCtx = null; }
+}
+
+function submitWish() {
+  const val = document.getElementById('wishInput').value.trim();
+  const msg = val || '願每一天都像今天一樣幸福，全家健康平安 💝';
+  const display = document.getElementById('wishDisplay');
+  document.getElementById('wishText').innerHTML = `🌟 心願已封存：<br><br><em>"${msg}"</em><br><br>— 寫在 2026 年 5 月 22 日，墾丁南灣的燭光下 🕯`;
+  display.classList.add('visible');
+  document.getElementById('wishInputWrap').style.display = 'none';
+  fireConfetti();
+}
+
+// ── Confetti ──
+const COLORS = ['#ffd60a','#ff6b6b','#00b4d8','#a29bfe','#2d9a5a','#ff9f43','#fff','#fd79a8'];
+function fireConfetti() {
+  const wrap = document.getElementById('confettiWrap');
+  wrap.innerHTML = '';
+  wrap.classList.add('active');
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    const size = 6 + Math.random() * 10;
+    piece.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${-20 - Math.random() * 100}px;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${COLORS[Math.floor(Math.random() * COLORS.length)]};
+      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+      animation-delay: ${Math.random() * 1.5}s;
+      animation-duration: ${2 + Math.random() * 2}s;
+    `;
+    wrap.appendChild(piece);
+  }
+  setTimeout(() => {
+    wrap.classList.remove('active');
+    wrap.innerHTML = '';
+  }, 5000);
+}
+
+// ── FAB scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('fab').classList.toggle('visible', window.scrollY > 200);
+});
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  restoreChecklist();
+  updateProgress();
+});
+</script>
+</body>
+</html>
